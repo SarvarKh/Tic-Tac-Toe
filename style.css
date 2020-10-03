@@ -1,0 +1,75 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-image: linear-gradient(90deg, rgba(0, 0, 20, .8), rgba(0, 0, 20, .7));
+    background-size: cover;
+    color: white;
+}
+
+header {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+}
+
+#game {
+    width: 26%;
+    margin: auto;
+}
+
+.container {
+    display: flex;
+    font-size: 2.5rem;
+    height: 50vh;
+    flex-wrap: wrap;
+    background-color: yellow;
+    justify-content: center;
+    text-align: center;
+}
+
+.box {
+    background-color: rgba(0, 0, 0, 1);
+    width: 33.3333%;
+    border: 3px solid rgba(200, 200, 200, .8);
+    padding: 45px 0;
+}
+
+.player1::after {
+    content: " \004F";
+}
+
+.player2::after {
+    content: ' \0058';
+}
+
+footer {
+    text-align: center;
+    margin-top: 100px;
+}
+
+#restartButton {
+    background-color: rgba(0, 0, 0, 1);
+    padding: .5rem 2rem;
+    color: white;
+    border: 2px solid rgba(0, 0, 0, 1);
+    border-radius: .3rem;
+}
+
+#restartButton:hover {
+    background-color: rgba(0, 0, 0, .5);
+    border: 2px solid rgba(0, 0, 0, .5);
+    box-shadow: 2px 2px 5px grey;
+}
+
+#winning-message-text {
+    background-color: rgba(200, 200, 200, .8);
+    width: 7%;
+    margin: auto;
+    margin-bottom: 10px;
+    color: rgba(0, 0, 0, 1);
+    border-radius: 5px;box-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
+}
+
