@@ -2,8 +2,6 @@
 This is a Tic-Tac-Toe web-game with the AI.
 
 
-Mobile view
-
 ![screenshot](index.png)
 
 
