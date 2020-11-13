@@ -1,5 +1,13 @@
+const boxElements = document.querySelectorAll(".box");
 const player1 = "player1";
 const player2 = "player2";
+let currentTurn;
+let currentPlayer;
+let winningMessage = document.querySelector("#winning-message-text");
+
+
+document.querySelector("#restartButton").addEventListener("click", startGame);
+
 const winningCombinations = [
     [0, 1, 2],
     [3, 4, 5],
@@ -11,68 +19,56 @@ const winningCombinations = [
     [2, 4, 6]
 ]
 
-const boxELements = document.querySelectorAll(".box");
-const winningMessageElement = document.getElementById("winningMessage");
-const restartButton = document.querySelector("#restartButton");
-const winningMessageTextElement = document.querySelector("#winning-message-text");
-let circleTurn;
-
 startGame();
-
-restartButton.addEventListener("click", startGame);
-
 function startGame() {
-    circleTurn = false;
-    boxELements.forEach(box => {
+    boxElements.forEach(box => {
+        currentTurn = true;
         box.classList.remove(player1);
         box.classList.remove(player2);
-        box.removeEventListener("click", play);
         box.addEventListener("click", play, {once: true});
+        winningMessage.innerHTML = "";
     })
-    winningMessageTextElement.innerText = "";
 }
 
-function play(e) {
-    const box = e.target;
-    const currentPlayer = circleTurn ? player2 : player1;
+function play(e, currentPlayer) {
+    let box = e.target;
+    currentPlayer = currentTurn ? player1 : player2;
     placeMark(box, currentPlayer);
-    if (checkWin(currentPlayer)) {
+    if(checkWin(currentPlayer)) {
         endGame(false);
     } else if (isDraw()) {
         endGame(true);
     } else {
-        swapTurns();   
+        swapTurn();
     }
 }
 
 function endGame(draw) {
-    if (draw) {
-        winningMessageTextElement.innerText = 'Draw!';
+    if(draw) {
+        winningMessage.innerHTML = `Draw`;
     } else {
-        winningMessageTextElement.innerText = `${circleTurn ? "player2" : "player1"} Wins!`;
+        winningMessage.innerHTML = `${currentTurn ? player1 : player2} won!`
     }
 }
 
 function isDraw() {
-    return [...boxELements].every(box => {
-        return box.classList.contains(player1) || box.classList.contains(player2)
-    })
+    return Array.from(boxElements).every(box => {
+            return box.classList.contains(player1) || box.classList.contains(player2);
+        })
 }
-
-
 function placeMark(box, currentPlayer) {
-    box.classList.add(currentPlayer);
+    box.classList.add(`${currentPlayer}`)
 }
 
-function swapTurns() {
-    circleTurn = !circleTurn;
+function swapTurn() {
+    currentTurn = !currentTurn;
 }
+
 
 function checkWin(currentPlayer) {
-    return winningCombinations.some(combinaiton => {
-        return combinaiton.every(index => {
-            return boxELements[index].classList.contains(currentPlayer);
+    return winningCombinations.some(combination => {
+        return combination.every(index => {
+            return boxElements[index].classList.contains(currentPlayer)
         })
     })
 }
-
